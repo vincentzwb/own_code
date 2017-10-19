@@ -1,0 +1,48 @@
+ $('.lunbo').carouFredSel({
+                responsive: true,
+               items: {
+                       visible: 1
+               },
+               scroll: {
+                        onBefore:function(data){
+                            
+                            var ele=data.items.visible;
+                            $(ele).find(".line").css({display:"block"});
+                            $(ele).find("h3").css({display:"block"});
+                             $(ele).find(".font p").css({display:"block"});
+                            $(ele).find(".line").delay(1000).animate({"margin-left":"0"},function(){
+                                    $(ele).find("h3").animate({"margin-left":"0"},function(){
+                                            $(ele).find(".font p").animate({"margin-left":"0"},function(){
+
+                                            });
+                                    });
+                            })
+                            
+                            var eleOld=data.items.old;
+                            
+                            $(eleOld).find(".line").delay(1000).css({"margin-left":"-1500px",display:"none"});
+                            $(eleOld).find("h3").delay(1000).css({"margin-left":"-1500px",display:"none"});
+                            $(eleOld).find(".font p").delay(1000).css({"margin-left":"-1500px",display:"none"});
+
+                        },                   
+                       duration: 1000, items: 1
+               }, 
+//			auto: {
+//				duration: 1000
+//			},
+                'swipe': {'onMouse': true,onTouch:true},
+               auto:true,
+               pagination: '.banner-pagination',
+               
+       });  
+
+
+
+
+
+$(".section5 .slider").trigger("slideTo",_index)
+
+
+
+
+https://dev7studios.com/caroufredsel-old/custom-events.php

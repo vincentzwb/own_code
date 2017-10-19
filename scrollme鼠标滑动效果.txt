@@ -1,0 +1,17 @@
+写入html,所有的属性值都添加到元素中，scrollme自动获取属性值，就进行动画。
+
+
+
+
+
+
+
+
+
+
+
+<div class="obj center scrollme">
+					<figure class="animateme" data-when="span" data-scale="1.5" data-from="1" data-to="0">
+						<img src="<?php echo WfPageHelper::getThemeBaseUrl(); ?>/skin/images/09_view12R_04.jpg">
+					</figure>
+				</div>

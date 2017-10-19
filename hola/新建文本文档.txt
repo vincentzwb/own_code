@@ -1,0 +1,23 @@
+http://hola.shwebspace.com
+
+
+//微信分享
+                    	jsApiList = ['onMenuShareTimeline', 'onMenuShareAppMessage'];
+                        share_timeline_data = {
+                              'title':'HOLA特力和乐2016秋冬线上新品发布会',
+                               'link':'http://hola.shwebspace.com',
+                               'img_url':'http://hola.shwebspace.com/themes/basic/skin/images/200x200.jpg',
+                               'callbackfunc':function(){
+                                 	         // 分享成功的 callback function
+                                }
+                        };
+                       share_app_data = {
+                               'title': 'HOLA特力和乐2016秋冬线上新品发布会', 
+                               'desc': 'HOLA特力和乐2016秋冬线上新品发布会', 
+                               'link': 'http://hola.shwebspace.com', 
+                               'img_url': 'http://hola.shwebspace.com/themes/basic/skin/images/200x200.jpg',
+                               'callbackfunc': function(){
+                                 	// 分享成功的 callback function
+                                }
+                        };
+                        construct('wxee84e25bedfb24ef', '', 'http://hola.shwebspace.com', jsApiList, share_timeline_data, share_app_data);

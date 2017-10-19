@@ -1,0 +1,29 @@
+function index_gd_home(a, b, w, h) {
+                    var $window = $(b);
+                    var $windowWidth = function() {
+                        return $window.width();
+                    };
+                    var $windowHeight = function() {
+                        return $window.height();
+                    };
+                    $window.fssResize(function() {
+                        var width = $windowWidth();
+                        var height = $windowHeight();
+
+                        $(b).each(function() {
+                            $this = $(this);
+                            $this.height(height).width(width);
+                            $this.triggerHandler("configuration", {height: height, width: width, items: {width: width}});
+                            $this.triggerHandler("updateSizes");
+                        });
+
+                    });
+
+                    $(a).each(function() {
+                        $(this).fullscreenstage({'width': w, 'height': h});
+                    });
+
+                    $(window).fssResize();
+                    $("#banner01").css({"visibility":"visible"});
+                }
+                 index_gd_home('Õº∆¨', 'Õº∆¨Õ‚≤„',1920, 400);

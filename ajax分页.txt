@@ -1,0 +1,120 @@
+<div class="fenye">
+                      <div class="countNmu" id="countNmu">共5项数据,1/1页</div>
+                      <div class="zhangwenbang">
+                          <ul class="pager">
+                              
+                          </ul>
+                      </div>
+                  </div>
+
+
+
+
+//**********分页************
+ var apps={
+  pageSize:5,
+  pagerSize:3,
+  currentPage:1
+};
+
+var buildPager=function(count){
+    var PageCount=Math.ceil(count/apps.pageSize);
+    $("#countNmu").html('共'+count+'项数据,'+apps.currentPage+'/'+ PageCount+'页');
+    var minPage=Math.ceil(apps.currentPage-apps.pagerSize/2);
+    var maxPage=Math.floor(apps.currentPage+apps.pagerSize/2);
+    if(minPage<1){minPage=1;}
+    if(maxPage>PageCount){maxPage=PageCount;}
+    $pagination=$('ul.pager');
+    $pagination.html('');
+    var $prev=$('<li class="paginate_button previous"><a href="#">上一页</a></li>');
+    if(apps.currentPage==minPage){$prev.addClass("disabled");}
+    $prev.appendTo($pagination);
+    if(count){
+         for(var i=minPage;i<=maxPage;i++)
+        {
+            var $page=$('</li><li class="paginate_button paginate_item"><a href="#">'+i+'</a></li>');
+            if (apps.currentPage==i){$page.addClass('active');}
+            $page.appendTo($pagination);
+        }
+    }
+    var $next=$('<li class="paginate_button next"><a href="#">下一页</a></li>')
+    if (apps.currentPage==maxPage){$next.addClass('disabled');}
+    $next.appendTo($pagination);
+}
+apps.changePage=function(page){
+    apps.currentPage=page;
+    var condition=$(".searchIpt").val();
+	
+    getData();
+}
+$('body').on('click','li.paginate_item',function(e){
+    e.preventDefault();
+    apps.changePage($('a',this).html()*1);
+});
+$('body').on('click','li.paginate_button.previous',function(e){
+    e.preventDefault();
+    if (!$(this).hasClass('disabled'))
+    {
+        apps.changePage(apps.currentPage-1);
+    }
+});
+$('body').on('click','li.paginate_button.next',function(e){
+    e.preventDefault();
+    if (!$(this).hasClass('disabled'))
+    {
+        apps.changePage(apps.currentPage+1);
+    }
+});
+
+
+
+
+
+
+
+
+
+
+
+
+//调用接口
+//        页面加载时调用·
+        getData('', '', 10000,0);
+        function getData(content,title,limit,offset,callback){
+            var requestData={
+                content:content, 
+                title:title,
+                limit:apps.pageSize,
+                offset:(apps.currentPage-1)*apps.pageSize,
+            };
+            console.log(requestData);
+            $.ajax({
+                type:'POST',
+                 url: "/shop/searchshop",
+                data: requestData,
+                dataType: "json",
+                success:function(data){
+                    console.log(data)
+                    var $count=data.result.count;
+             
+                    if(data['result']!==''){
+                        $(".fenye").css({display:"block"});
+                         writeDate(data.result);
+                      // if(typeof callback=='function'){
+                      //     callback(data.result);
+                      // }
+                    }else{
+                        $(".shops_wrap").children().detach();
+                         $(".shops_wrap").append('<p>输入的内容不存在</p>')
+                         $(".fenye").css({display:"none"});
+                    }
+                     buildPager($count);
+                   
+                   
+                },
+                error:function(){
+                    console.log("error")
+                }
+            })
+        }
+          

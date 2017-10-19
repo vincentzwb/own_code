@@ -1,0 +1,57 @@
+	function videoDome(){
+                var vido1_src=$(".videosrc1").data("src");
+		$(".videosrc1").jPlayer({
+			ready:function(){
+				$(this).jPlayer("setMedia",{
+					m4v:vido1_src
+				})
+			},
+			//solution:"flash,html",
+			swfPath: "/themes/basic/skin/js",
+			loop:true,
+			volume: 0.4,
+			supplied: "m4v",
+			size:{
+				width:'100%',
+				height:'100%'
+			}
+
+		});
+                var vido2_src=$(".videosrc2").data("src");
+			
+		$(".videosrc2").jPlayer({
+			ready:function(){
+				$(this).jPlayer("setMedia",{
+					m4v:vido2_src
+				})
+			},
+			//solution:"flash,html",
+			swfPath: "/themes/basic/skin/js",
+			loop:true,
+			supplied: "m4v",
+			size:{
+				width:'100%',
+				height:'100%'
+			}
+		});
+		
+		
+		$(".Vdio1").mouseenter(function() {
+			$("img", this).stop().animate({'opacity': 0});
+            $(".videoimg", this).jPlayer("play");
+        });
+        $(".Vdio1").mouseleave(function() {
+            $("img", this).stop().animate({'opacity': 1});
+            $(".videoimg", this).jPlayer("stop");
+        });
+        
+        $(".Vdio2").mouseenter(function() {
+            $("img", this).stop().animate({'opacity': 0});
+            $(".videoimg", this).jPlayer("play");
+        });
+        $(".Vdio2").mouseleave(function() {
+            $("img", this).stop().animate({'opacity': 1});
+            $(".videoimg", this).jPlayer("stop");
+        });
+	}
+	

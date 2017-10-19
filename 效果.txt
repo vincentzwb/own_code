@@ -1,0 +1,45 @@
+手机活动页
+http://g.eqxiu.com/s/ayjutO2Q?eqrcode=1&from=singlemessage
+
+
+http://dev.dcloud.net.cn/mui/
+
+
+轮播https://dev7studios.com/caroufredsel-old/configuration.php#pagination_object
+
+
+
+线条自适应
+
+http://www.marineharvest.com/investor/other-presentations/
+
+
+效果网站http://codepen.io/jsayner/pen/xvEca
+
+大事记时间轴
+http://gdi.review.webfoss.com/site/about_dgidashiji
+
+http://kangwei.review.webfoss.com/site/history
+
+
+
+canvas
+http://www.pixijs.com/
+
+three.js
+
+
+
+
+效果
+http://www.duravit.com/homepage.com-en.html
+
+
+缓慢出现效果
+http://www.xindny.com/
+（
+	wow2.js
+	animate.css
+	运行new WOW().init();
+
+）

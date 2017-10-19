@@ -1,0 +1,158 @@
+https://segmentfault.com/a/1190000000438357
+
+
+
+
+
+<script src="http://ditu.google.cn/maps/api/js?key=AIzaSyCjc8H8yM570TbukN0wNEMXA_nmxQBQjBk"></script>
+<script>
+    var maps={
+        maplat:0,
+        maplng:0
+    };
+    
+    function initMap() {
+        var map = new google.maps.Map(document.getElementById('map'), {
+        center: {lat: maps.maplat, lng: maps.maplng},
+        scrollwheel: false,
+        zoom: 16
+      });
+      var _center=new google.maps.LatLng( maps.maplat,maps.maplng);
+       var marker = new google.maps.Marker({
+            position: _center,
+            map: map,
+            title: 'Leeg',
+            animation: google.maps.Animation.DROP,
+        });
+        marker.setMap(map);
+
+
+        var contentString = '<div id="content">' +'<div>' +
+        '</div>' +
+        '<h1>'+maps.title+'</h1>' +
+        '<div id="bodyContent">' +maps.add+
+        '</div>' +
+        '</div>';
+
+        var infowindow = new google.maps.InfoWindow({
+            content: contentString
+        });
+
+        google.maps.event.addListener(marker, 'click', function () {
+            infowindow.open(map, marker);
+        });
+
+    }
+
+    
+    $("#id_country").change(function(e) {
+        e.stopPropagation();
+        var lat=$("#id_country").find("option:selected").attr('data-lat');
+        var lng=$("#id_country").find("option:selected").attr('data-lng');
+       
+        maps.maplat=Number(lng);
+        maps.maplng=Number(lat);
+         maps.title=$("#id_country").find("option:selected").attr('data-title');
+        maps.add=$("#id_country").find("option:selected").attr('data-add');
+        initMap();
+    });
+    $(function(){
+        var lat=$("#id_country").find("option:selected").attr('data-lat');
+        var lng=$("#id_country").find("option:selected").attr('data-lng');
+        maps.maplat=Number(lng);
+        maps.maplng=Number(lat);
+        maps.title=$("#id_country").find("option:selected").attr('data-title');
+        maps.add=$("#id_country").find("option:selected").attr('data-add');
+        initMap();
+        
+    });
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//开启信息窗口
+map.openInfoWindow(infoWindow,point);
+
+
+
+
+
+function initialize() {  
+
+		var _lat='<?php echo $contactusInfo->getNodeFormValue('maplat');?>';
+		var _lng='<?php echo $contactusInfo->getNodeFormValue('maplng');?>';
+				
+		createMap(_lat,_lng);//创建地图
+		setMapEvent();//设置地图事件
+		addMapControl();//向地图添加控件
+		addMapOverlay(_lat,_lng);//向地图添加覆盖物
+			
+	}  
+	
+	function createMap(_lat,_lng){ 
+      map = new BMap.Map("map"); 
+      map.centerAndZoom(new BMap.Point(_lng,_lat),16);
+    }
+    function setMapEvent(){
+      map.enableScrollWheelZoom();
+      map.enableKeyboard();
+      map.enableDragging();
+      map.enableDoubleClickZoom()
+    }
+    function addClickHandler(target,window){
+        target.addEventListener("click",function(){
+			 target.openInfoWindow(window);
+		});
+		
+    }
+    function addMapOverlay(_lat,_lng){
+      var markers = [
+        {content:"",title:"协鑫-智慧城市",imageOffset: {width:-23,height:-21},position:{lat:_lat,lng:_lng}}
+      ];
+      for(var index = 0; index < markers.length; index++ ){
+        var point = new BMap.Point(markers[index].position.lng,markers[index].position.lat);
+        var marker = new BMap.Marker(point,{icon:new BMap.Icon("http://api.map.baidu.com/lbsapi/createmap/images/icon.png",
+		new BMap.Size(20,25),{
+          imageOffset: new BMap.Size(markers[index].imageOffset.width,markers[index].imageOffset.height)
+        }
+		)});
+        var label = new BMap.Label("123",{offset: new BMap.Size(25,5)});
+        var opts = {
+          width: 260,
+          title: '<img src="/themes/basic/skin/images/logo02.png" width="250"/>',//markers[index].title
+          enableMessage: false,
+        };
+        var infoWindow = new BMap.InfoWindow(markers[index].content,opts);
+        // marker.setLabel(label);//右边红框标记
+        addClickHandler(marker,infoWindow);
+		map.openInfoWindow(infoWindow,point); //开启信息窗口
+        map.addOverlay(marker);
+      };
+    }
+    //向地图添加控件
+    function addMapControl(){
+      var navControl = new BMap.NavigationControl({anchor:BMAP_ANCHOR_TOP_LEFT,type:BMAP_NAVIGATION_CONTROL_LARGE});
+      map.addControl(navControl);
+    }
+	
+
+
+
+

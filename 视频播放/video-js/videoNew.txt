@@ -1,0 +1,38 @@
+ <div class="video-js-box" style="margin:0px auto">
+                <!-- Using the Video for Everybody Embed Code http://camendesign.com/code/video_for_everybody -->
+                <video id="example_video_1" class="video-js" width="100%" height="409" controls="controls" preload="auto" poster="/themes/basic/skin/images/video_img01.jpg">
+                    <source src="/themes/basic/skin/video/video.mp4" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"' />
+                <!--       <source src="http://video-js.zencoder.com/oceans-clip.webm" type='video/webm; codecs="vp8, vorbis"' />
+                    <source src="http://video-js.zencoder.com/oceans-clip.ogv" type='video/ogg; codecs="theora, vorbis"' /> -->
+                    <!-- 如果浏览器不兼容HTML5则使用flash播放-->
+                    <object id="flash_fallback_1" class="vjs-flash-fallback" width="100%" height="409" type="application/x-shockwave-flash"
+                            data="/wp-content/themes/suidao/img/flowplayer-3.2.18.swf">
+                        <param name="movie" value="/wp-content/themes/suidao/img/flowplayer-3.2.18.swf" />
+                        <param name="allowfullscreen" value="true" />
+                        <param name="flashvars" value='config={"playlist":["/themes/basic/skin/suidao/img/about/zonglan_01.jpg", {"url": "/themes/basic/skin/video/video.mp4","autoPlay":false,"autoBuffering":true}]}' />
+                        <!-- 视频图片. -->
+                        <img src="/themes/basic/skin/suidao/img/about/zonglan_01.jpg"  alt="Poster Image"
+                                title="No video playback capabilities." />
+                    </object>
+                </video>
+               
+            </div>
+
+
+
+<link href="<?php echo WfPageHelper::getThemeBaseUrl(); ?>/skin/suidao/css/video-js.css" rel="stylesheet"> 
+
+<!-- If you'd like to support IE8 -->
+<!-- // <script src="http://vjs.zencdn.net/ie8/ie8-version/videojs-ie8.min.js"></script> -->
+<!-- 加载 VideoJS js -->
+<script src="<?php echo WfPageHelper::getThemeBaseUrl(); ?>/skin/suidao/js/video.js" type="text/javascript" charset="utf-8"></script> 
+
+<script type="text/javascript">
+    //   // 这段代码必须放在video.js后面
+
+    //   // 页面加载完成  才加载VideoJS的标签
+    $(function() {
+        VideoJS.setupAllWhenReady();
+    });
+
+</script>

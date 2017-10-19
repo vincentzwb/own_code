@@ -1,0 +1,76 @@
+$("#videosrc2").jPlayer({
+                    ready:function(){
+                            $(this).jPlayer("setMedia",{
+                                    m4v:source,
+                            }).jPlayer("load");
+                    },
+                    solution:"flash,html",
+                    swfPath: "/themes/basic/skin/js",
+                    loop:false,
+                    supplied: "m4v",
+                    cssSelectorAncestor: '.playVideo',
+                    cssSelector: {
+                        videoPlay: '.play',
+                        play: '.jp-play',
+                        pause: '.jp-pause',
+                        stop: '.jp-stop',
+                        seekBar: '.jp-seek-bar',
+                        playBar: '.jp-play-bar',
+                        mute: '.jp-mute',
+                        unmute: '.jp-unmute',
+                        volumeBar: '.jp-volume-bar',
+                        volumeBarValue: '.jp-volume-bar-value',
+                        volumeMax: '.jp-volume-max',
+                        playbackRateBar: '.jp-playback-rate-bar',
+                        playbackRateBarValue: '.jp-playback-rate-bar-value',
+                        currentTime: '.jp-current-time',
+                        duration: '.jp-duration',
+                        fullScreen: '.jp-full-screen',
+                        restoreScreen: '.jp-restore-screen',
+                        repeat: '.jp-repeat',
+                        repeatOff: '.jp-repeat-off',
+                        gui: '.controls',
+                        noSolution: '.jp-no-solution'
+                    },
+                    size:{
+                            width:'100%',
+                            height:'100%'
+                    },
+                    keyEnabled:true,
+                    smoothPlayBar:true,
+
+		})
+
+
+
+ $("#videosrc2").jPlayer('pause'); 
+$("#videosrc2").jPlayer('setMedia',{m4v:vidSrc}); 
+$("#videosrc2").jPlayer('play');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+“Ù∆µ
+$("#music").jPlayer({
+            ready:function(){
+                    $(this).jPlayer("setMedia",{
+                            m4a:flkia.pm3,
+                    })
+            },
+            swfPath: "js/",
+            loop:false,
+            supplied: "m4a, oga",
+            wmode: "window",
+            
+		})

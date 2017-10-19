@@ -1,0 +1,26 @@
+$(".clickImg").prettyPhoto();
+
+
+
+
+<a class="clickImg" href="images/invest01.png">
+                                                        <div class="s_c_img">
+                                                            <img src="images/invest01.png" />
+                                                        </div>
+                                                        <div class="enlarge">
+                                                                <p>点击放大</p>
+                                                        </div>
+                                                     </a>
+
+
+
+
+可轮播
+参考
+http://lg.review.webfoss.com/shop/build_detail/227?a=&title=%E8%BF%90%E8%BE%93%E7%94%A8%E4%BA%A7%E5%93%81%28ELTRANS+BUS%29
+
+$(".pop").prettyPhoto({
+            social_tools: "",
+            autoplay_slideshow: false,
+            slideshow: 3000
+        });

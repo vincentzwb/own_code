@@ -1,0 +1,4 @@
+$.srSmoothscroll({
+                    step: 150,
+                    speed:600
+                });

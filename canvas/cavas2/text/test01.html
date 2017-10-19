@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<style type="text/css">
+			#canvas1{
+				box-shadow: 3px 3px 10px black;
+			}
+		</style>
+	</head>
+	<body>
+		<canvas id="canvas1" width="500" height="500"></canvas>
+		<input type="range" name="slider" id="silder" value="0.5" max="1" min="0" step="0.01"/>
+	</body>
+	<script type="text/javascript">
+	window.requestNextAnimationFrame =
+   (function () {
+      var originalWebkitRequestAnimationFrame = undefined,
+          wrapper = undefined,
+          callback = undefined,
+          geckoVersion = 0,
+          userAgent = navigator.userAgent,
+          index = 0,
+          self = this;
+
+      // Workaround for Chrome 10 bug where Chrome
+      // does not pass the time to the animation function
+      
+      if (window.webkitRequestAnimationFrame) {
+         // Define the wrapper
+
+         wrapper = function (time) {
+           if (time === undefined) {
+              time = +new Date();
+           }
+           self.callback(time);
+         };
+
+         // Make the switch
+          
+         originalWebkitRequestAnimationFrame = window.webkitRequestAnimationFrame;    
+
+         window.webkitRequestAnimationFrame = function (callback, element) {
+            self.callback = callback;
+
+            // Browser calls the wrapper and wrapper calls the callback
+            
+            originalWebkitRequestAnimationFrame(wrapper, element);
+         }
+      }
+
+      // Workaround for Gecko 2.0, which has a bug in
+      // mozRequestAnimationFrame() that restricts animations
+      // to 30-40 fps.
+
+      if (window.mozRequestAnimationFrame) {
+         // Check the Gecko version. Gecko is used by browsers
+         // other than Firefox. Gecko 2.0 corresponds to
+         // Firefox 4.0.
+         
+         index = userAgent.indexOf('rv:');
+
+         if (userAgent.indexOf('Gecko') != -1) {
+            geckoVersion = userAgent.substr(index + 3, 3);
+
+            if (geckoVersion === '2.0') {
+               // Forces the return statement to fall through
+               // to the setTimeout() function.
+
+               window.mozRequestAnimationFrame = undefined;
+            }
+         }
+      }
+      
+      return window.requestAnimationFrame   ||
+         window.webkitRequestAnimationFrame ||
+         window.mozRequestAnimationFrame    ||
+         window.oRequestAnimationFrame      ||
+         window.msRequestAnimationFrame     ||
+
+         function (callback, element) {
+            var start,
+                finish;
+
+            window.setTimeout( function () {
+               start = +new Date();
+               callback(start);
+               finish = +new Date();
+
+               self.timeout = 1000 / 60 - (finish - start);
+
+            }, self.timeout);
+         };
+      }
+   )
+();
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+		var canvas = document.getElementById("canvas1");
+		var context = canvas.getContext("2d");
+		var slider = document.getElementById("silder");
+		var scale = 1;
+		var myImg = new Image();
+			myImg.src = "https://gss0.baidu.com/-vo3dSag_xI4khGko9WTAnF6hhy/zhidao/pic/item/902397dda144ad34ac75c376d7a20cf430ad857d.jpg";
+		myImg.onload = function () {
+			creatImg (scale)
+		}
+		
+//		 slider.onmousedown =  function() {
+//		 	slider.onmousemove = function () {
+//		 		scale = slider.value;
+//		 		creatImg(scale);
+//		 	}
+//		 }
+		
+		function creatImg (scale) {
+			
+			var imgh = canvas.height * scale;
+			var imgw = canvas.width * scale;
+			var x = canvas.width / 2 - imgw / 2;
+			var y = canvas.height / 2 - imgh / 2
+			
+			context.clearRect(0 , 0 , canvas.width , canvas.height);
+			context.drawImage(myImg , x , y ,imgw , imgh)
+			
+		}
+		
+		
+		var step= function(timestamp) { 
+				scale=scale+0.005;
+	            if (scale<1.2){
+	                creatImg (scale);
+	                window.requestNextAnimationFrame(step);
+	            }
+	            
+		}
+		var step2= function(timestamp) { 
+				scale=scale-0.005;
+	            if (scale>1){
+	                creatImg (scale);
+	                window.requestNextAnimationFrame(step2);
+	            }
+	            
+		}
+		
+		canvas.addEventListener("mousemove", function (evt) { 
+		
+			window.requestNextAnimationFrame(step);
+		
+		
+		},false);
+		
+		canvas.addEventListener("mouseleave", function (evt) { 
+			window.requestNextAnimationFrame(step2);
+		
+		
+		},false);
+		
+		
+	</script>
+</html>

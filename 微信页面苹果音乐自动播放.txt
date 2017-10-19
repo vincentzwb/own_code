@@ -1,0 +1,4 @@
+ document.addEventListener("WeixinJSBridgeReady", function () {
+                document.getElementById('audio').play();
+                // audio.pause();											   									   
+        }, false);

@@ -1,0 +1,118 @@
+http://mrvino.review.webfoss.com/site/product?Product_page=2
+http://www.mrvino.com/site/product
+运行不成功，存在内存泄漏
+function CountDown(EndTime,ele,timeout){
+				var NowTime = new Date();
+				var t =EndTime.getTime() - NowTime.getTime();
+				var d=0;
+				var h=0;
+				var m=0;
+				var s=0;
+				if(t>=0){
+				  d=Math.floor(t/1000/60/60/24);
+				  h=Math.floor(t/1000/60/60%24);
+				  m=Math.floor(t/1000/60%60);
+				  s=Math.floor(t/1000%60);
+				  
+				  $(".day",ele).html(d);
+				  $(".hours",ele).html(h);
+				  $(".minute",ele).html(m);
+				  $(".second",ele).html(s);
+				  
+				  
+		　　　　　timeout=setTimeout(CountDown(EndTime,ele,timeout),1000); 
+		　　　　　 
+				 
+				}else{
+					console.log("1")
+					clearTimeout(timeout)
+					$(".day",ele).html("0");
+					$(".hours",ele).html("0");
+					$(".minute",ele).html("0");
+					$(".second",ele).html("0");
+				}
+				
+			}
+			
+			
+			
+			
+			timeEle();
+			function timeEle(){
+				var timeLen=$(".CountDown").length;
+					EndTime_data=new Object(),
+					EndTime=new Object(),
+					timeout=new Object();
+				for(var i=0;i<1;i++){
+					EndTime_data[i]=$(".CountDown").eq(i).data("time");
+					EndTime[i]= new Date(EndTime_data[i]+' 23:59:59');
+					
+					timeout[i];
+					new CountDown(EndTime[i],$(".CountDown").get(i),timeout[i]);
+					console.log(2)
+				}
+				
+			}
+
+
+
+
+ok！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！
+
+function showTime(endTime,ele) {
+				
+				this.endTime=endTime;
+				this.ele = ele;
+			  }
+			showTime.prototype.setTimeShow=function(){
+				
+				var NowTime = new Date();
+				var t =this.endTime.getTime() - NowTime.getTime();
+				
+				var d=0;
+				var h=0;
+				var m=0;
+				var s=0;
+				if(t>=0){
+				  d=Math.floor(t/1000/60/60/24);
+				  h=Math.floor(t/1000/60/60%24);
+				  m=Math.floor(t/1000/60%60);
+				  s=Math.floor(t/1000%60);
+				  
+				  $(".day",this.ele).html(d);
+				  $(".hours",this.ele).html(h);
+				  $(".minute",this.ele).html(m);
+				  $(".second",this.ele).html(s);
+				  
+				  var self=this;
+		　　　　　timeout=setTimeout(function(){
+					self.setTimeShow();
+				  },1000); 
+		　　　　　 
+				 
+				}else{
+					$(".day",this.ele).html("0");
+					$(".hours",this.ele).html("0");
+					$(".minute",this.ele).html("0");
+					$(".second",this.ele).html("0");
+				}
+			}
+			timeEle();
+			
+			
+			
+			function timeEle(){
+				var timeLen=$(".CountDown").length;
+					EndTime_data=new Object(),
+					EndTime=new Object(),
+					num=new Object();
+				for(var i=0;i<timeLen;i++){
+					EndTime_data[i]=$(".CountDown").eq(i).data("time");
+					EndTime[i]= new Date(EndTime_data[i]+' 23:59:59');
+					
+					num[i]=new showTime(EndTime[i],$(".CountDown").get(i));
+					num[i].setTimeShow();
+					
+				}
+				
+			}

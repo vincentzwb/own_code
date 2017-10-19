@@ -1,0 +1,8 @@
+$(".section2").waypoint(function (dir) {
+                    if (dir === 'down')
+                    {
+                        
+                    }else{
+                        
+                    }
+                }, {'offset': "108px"});

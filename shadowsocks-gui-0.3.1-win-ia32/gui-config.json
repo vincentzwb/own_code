@@ -1,0 +1,13 @@
+{
+  "index": 0,
+  "configs": [
+    {
+      "server": "ss.webfoss.com",
+      "server_port": "9997",
+      "password": "wf55036278",
+      "local_port": "1097",
+      "method": "table",
+      "timeout": "600"
+    }
+  ]
+}

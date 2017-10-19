@@ -1,0 +1,138 @@
+http://developer.baidu.com/map/jsdemo.htm#i7_3
+
+
+
+
+
+<script type="text/javascript">
+    //创建和初始化地图函数：
+    function initMap(_data){
+        console.log(_data)
+      createMap(_data);//创建地图
+      setMapEvent();//设置地图事件
+      addMapControl();//向地图添加控件
+      addMapOverlay(_data);//向地图添加覆盖物
+      setTimeout(function(){
+         $(".banner .mapBd").css({visibility:"visible"});
+      },400)
+      
+    }
+    function createMap(_data){ 
+      map = new BMap.Map("map"); 
+      var myGeo = new BMap.Geocoder();
+      myGeo.getPoint(_data[0]["address"], function(point){
+        map.centerAndZoom(new BMap.Point(point.lng,point.lat),12);
+      })
+
+      
+    }
+    function setMapEvent(){
+      map.enableScrollWheelZoom();
+      map.enableKeyboard();
+      map.enableDragging();
+      map.enableDoubleClickZoom()
+    }
+    function addClickHandler(target,window){
+      target.addEventListener("click",function(){
+        target.openInfoWindow(window);
+      });
+    }
+    function addMapOverlay(_data){
+
+        
+       var myGeo = new BMap.Geocoder();
+       var sum=0;
+        var markers=new Array();
+        for(var i in _data){
+            if(/^\d+$/.test(i)){
+                var _obj=new Object();
+                _obj.content=_data[i]["address"];
+                _obj.title=_data[i]["title"];
+                _obj.imageOffset={width:0,height:3};
+                _obj.position={lat:31.209111,lng:121.552174};
+                 markers.push(_obj);
+                
+            }
+        }
+        bdGEO();
+        function bdGEO(){
+            var add = markers[sum];
+            sum++;
+            geocodeSearch(add);
+            
+        }
+
+        function geocodeSearch(add){
+            if(sum < markers.length){
+                setTimeout(bdGEO,400);
+            }
+            myGeo.getPoint(add.content, function(point){
+                console.log("add.content")
+                console.log(add.content)
+                console.log(point.lng+":"+point.lat)
+                var point = new BMap.Point(point.lng,point.lat);
+                var marker = new BMap.Marker(point,{icon:new BMap.Icon("/themes/basic/skin/images/cursor_03.png",new BMap.Size(20,55),{
+                imageOffset: new BMap.Size(add.imageOffset.width,add.imageOffset.height)
+                })});
+                var label = new BMap.Label(add.title,{offset: new BMap.Size(25,5)});
+                var opts = {
+                width: 200,
+                title: add.title,
+                enableMessage: false
+                };
+                var infoWindow = new BMap.InfoWindow(add.content,opts);
+                marker.setLabel(label);
+                addClickHandler(marker,infoWindow);
+                map.addOverlay(marker);
+            })
+        
+        }
+
+
+       
+
+    }
+    
+
+
+
+
+    //向地图添加控件
+    function addMapControl(){
+      var scaleControl = new BMap.ScaleControl({anchor:BMAP_ANCHOR_BOTTOM_LEFT});
+      scaleControl.setUnit(BMAP_UNIT_IMPERIAL);
+      map.addControl(scaleControl);
+      var navControl = new BMap.NavigationControl({anchor:BMAP_ANCHOR_TOP_LEFT,type:BMAP_NAVIGATION_CONTROL_LARGE});
+      map.addControl(navControl);
+      var overviewControl = new BMap.OverviewMapControl({anchor:BMAP_ANCHOR_BOTTOM_RIGHT,isOpen:true});
+      map.addControl(overviewControl);
+    }
+      function getPoint(title,address){
+        var myGeo = new BMap.Geocoder();
+        myGeo.getPoint(address, function(point){
+            // map.centerAndZoom(new BMap.Point(point.lng,point.lat),12);
+            var x = point.lng;
+            var y = point.lat;
+            var point2 = new BMap.Point(x,y);
+            var info = "<div>";
+            info += "<p style='color:#BE1C27;font-size:16px;'>"+title+"</p>";
+            info += "<div style='font-size:12px;'>"+address+"</div>";
+            
+            info += "</div>";
+            
+            var marker = new BMap.Marker(point2);  // 创建标15
+            map.addOverlay(marker);// 将标注添加到地图中
+            var infoWindow2 = new BMap.InfoWindow(info);
+            marker.addEventListener("click", function(){this.openInfoWindow(infoWindow2);});
+            marker.openInfoWindow(infoWindow2);
+        })
+
+
+
+        $(".banner .mapBd").css({visibility:"visible"})
+        $(".banner .mapInner").css({display:"none"})
+		
+      }
+      var map;
+  </script>
+

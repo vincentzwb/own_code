@@ -1,0 +1,13 @@
+4.载入slimscroll插件（记得一定在DOM树加载完才能为元素绑定插件）
+
+可以配合fullpage插件
+
+
+复制代码
+script type=textjavascript
+    jQuery(document).ready(function ($) {
+        $(#inner-content).slimScroll({
+            height '300px'
+        });
+    });
+script

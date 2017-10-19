@@ -1,0 +1,31 @@
+<script>
+			var total=$("#loading .load_bg").width();
+			$("#loading .load_effe").width(total)
+			var bool=true;
+			$('body').bind('preloadupdate',function(adta){
+			 	
+			 	if(true){
+			 		$("#loading .effe").stop(false,false).animate({width:adta.percent*total},800,function(){
+				 		if(adta.percent==1){
+				 			$('body').unbind("preloadupdate");
+				 			preloadfinish();
+				 		}
+				 		
+				 	})
+			 	}
+			 	if(adta.percent==1){
+			 		bool=false;
+			 	}
+			 	
+			 } ).preloader();
+			 
+			function preloadfinish(){
+				$('body').bind('preloadfinish',function(){
+				 	$("#loading").css({display:"none"})
+				 	
+				 	$('body').unbind("preloadfinish")
+				 } ).preloader();
+			}
+			 
+			 
+		</script>

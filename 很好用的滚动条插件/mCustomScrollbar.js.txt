@@ -1,0 +1,160 @@
+mCustomScrollbar<!doctype html>    
+<html>    
+ <head>    
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">    
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">    
+  <meta name="renderer" content="webkit">    
+  <title>demo</title>    
+  <link rel="stylesheet" href="css/jquery.mCustomScrollbar.css" />    
+    
+  <script type="text/javascript" src="../js/jquery-1.11.3.min.js"></script>    
+  <script type="text/javascript" src="js/jquery.mCustomScrollbar.concat.min.js"></script>    
+  <style>    
+    * {margin: 0; padding: 0;}    
+    body, html {width: 100%; height: 100%; background: pink; overflow: hidden;}    
+    .body {width: 100%; height: 100%; background: grey; position: absolute;}    
+    .content {width: 200px; height: 300px; border: 2px solid purple;}    
+    .item {border: 2px solid blue;}    
+  </style>    
+ </head>    
+ <body>    
+    <div class="body">    
+    
+        <button class="delete">点击删除一个内部的滚动条</button>    
+        <button class="scrollTo">滚动到固定位置</button>    
+    
+        <div class="content">    
+            <div class="item">    
+                <input type="text">    
+                <p>这是内部的滚动条</p>    
+                <p>这是内部的滚动条</p>    
+            </div>    
+            <div class="item">    
+                <input type="text">    
+                <p>这是内部的滚动条</p>    
+                <p>这是内部的滚动条</p>    
+            </div>    
+            <div class="item">    
+                <input type="text">    
+                <p>这是内部的滚动条</p>    
+                <p>这是内部的滚动条</p>    
+            </div>    
+            <div class="item">    
+                <input type="text">    
+                <p>这是内部的滚动条</p>    
+                <p>这是内部的滚动条</p>    
+            </div>    
+            <div class="item">    
+                <input type="text">    
+                <p>这是内部的滚动条</p>    
+                <p>这是内部的滚动条</p>    
+            </div>    
+            <div class="item">    
+                <input type="text">    
+                <p>这是内部的滚动条</p>    
+                <p>这是内部的滚动条</p>    
+            </div>    
+            <div class="item">    
+                <input type="text">    
+                <p>这是内部的滚动条</p>    
+                <p>这是内部的滚动条</p>    
+            </div>   
+        </div>    
+    
+        <p>这是浏览器的滚动条</p>    
+        <p>这是浏览器的滚动条</p>    
+        <p>这是浏览器的滚动条</p>    
+        <p>这是浏览器的滚动条</p>    
+        <p>这是浏览器的滚动条</p>    
+        <p>这是浏览器的滚动条</p>    
+        <p>这是浏览器的滚动条</p>    
+        <p>这是浏览器的滚动条</p>    
+        <p>这是浏览器的滚动条</p>    
+        <p>这是浏览器的滚动条</p>    
+        <p>这是浏览器的滚动条</p>    
+        <p>这是浏览器的滚动条</p>    
+        <p>这是浏览器的滚动条</p>    
+        <p>这是浏览器的滚动条</p>    
+        <p>这是浏览器的滚动条</p>    
+        <p>这是浏览器的滚动条</p>    
+        <p>这是浏览器的滚动条</p>    
+        <p>这是浏览器的滚动条</p>    
+        <p>这是浏览器的滚动条</p>    
+        <p>这是浏览器的滚动条</p>    
+        <p>这是浏览器的滚动条</p>    
+        <p>这是浏览器的滚动条</p>    
+        <p>这是浏览器的滚动条</p>    
+        <p>这是浏览器的滚动条</p>    
+        <p>这是浏览器的滚动条</p>    
+        <p>这是浏览器的滚动条</p>    
+        <p>这是浏览器的滚动条</p>    
+        <p>这是浏览器的滚动条</p>    
+    
+    </div>    
+    
+    
+ </body>    
+  <script>    
+    ;$(function() {    
+        //参数配置介绍：http://www.wufangbo.com/mcustomscrollbar/    
+    
+        //一个简单的实例    
+        $(".content").mCustomScrollbar({    
+            scrollButtons: {//上下按钮配置    
+                enable: true,//是否添加按钮    
+                //scrollType: 'pixels',//点击滚动是否有停顿效果    
+                //scrollAmount: 50,//每次点击滚动的距离    
+            },    
+            autoHideScrollbar: true,    
+            //theme:"light-thick",//以下是主题    
+            theme:"rounded-dots",    
+            //theme:"dark-thin",    
+            //theme:"light-3",    
+            //theme:"3d-thick",    
+            //theme:"3d",    
+            //theme:"rounded-dark",    
+            //horizontalScroll: true,//创建水平滚动条    
+            //scrollInertia: 0,//滚动惯性    
+            //mouseWheel: false,//是否取消滚轮效果    
+            //mouseWheelPixels: 100,//滚动一下移动的距离    
+            //autoDraggerLength: false,//自动调整滚动条的长度    
+            callbacks: {    
+                onScrollStart: function() {    
+                    $('.body').append('滚动开始//');    
+                },    
+                onScroll: function() {    
+                    $('.body').append('滚动结束//');    
+                },    
+                onTotalScroll: function() {    
+                    $('.body').append('滚动至底部//');    
+                },    
+                onTotalScrollBack: function() {    
+                    $('.body').append('滚动至顶部//');    
+                },    
+                whileScrolling: function() {    
+                    $('.body').append('...滚动中...//');    
+                },    
+            },    
+        });    
+    
+        //删除    
+        $('.delete').on('click', function() {    
+            $('.item:last').remove();    
+        });            
+    
+        //滚动到固定位置    
+        $('.scrollTo').on('click', function() {    
+            $(".content").mCustomScrollbar('scrollTo', 300);//可以是string    
+        });    
+    
+        //隐藏这是浏览器的滚动条    
+        $('.body').mCustomScrollbar({    
+            scrollButtons: {//上下按钮配置    
+                enable: true,//是否添加按钮    
+            },    
+        });    
+    
+    
+    });    
+ </script>    
+</html>  

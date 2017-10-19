@@ -1,0 +1,71 @@
+isoto = $('.video_list').isotope({
+			  itemSelector: '.video-grid-item',
+			  percentPosition: true,
+			  masonry: {
+				columnWidth:'.grid-sizer'
+			  }
+			});
+
+
+
+<div class="video_list">
+		<div class="grid-sizer"></div> //width=33.3%;
+
+
+
+                 <?php foreach ($list as $key => $model) { ?>
+                    <div class="video-grid-item video-grid-item1">
+                            <a class="fancybox " data-fancybox-type="iframe"  data-src="<?php echo $model->getFormValue('video') ?>" href="javascript:void(0);">
+                                    <img src="<?php echo $model->getFormValue('picture') ?>">
+                            </a>
+                            <div class="video-txt1"><?php echo $model -> title;?><?php $model->renderUpdateLink() ?></div>
+                            <div class="video-txt2"><?php echo $model->keyword ?></div>
+                            <div class="video-txt3"><?php echo date('d/m/Y', $model->getNodeCreatedTime()) ?> </div>
+                    </div>
+                 <?php } ?>
+
+
+
+
+		
+	</div>
+
+
+//ajax添加数据
+
+$.ajax({
+            url : _url,
+            type : "post",
+            data :" ",
+            dataType : "html",
+            success : function(data){
+                
+                    var str = $(data);
+
+
+
+                    isoto.append(str);
+                    isoto.isotope('appended', str);
+                   
+
+
+                    $("#page2").val(page2+1);
+                    isoto.isotope('layout');
+                    videoClick();
+                    
+                    
+//                    va imgNum=$('img').length;
+                    $('img').load(function(){
+                       console.log("success");
+                        isoto.isotope('layout');
+                        
+                    });
+            },
+            error : function(xhr, status, error) {
+               
+                    alert(error);
+            }
+    });
+
+
+//刷新布局（调整样式）isoto.isotope('layout');

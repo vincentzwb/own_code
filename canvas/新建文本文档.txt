@@ -1,0 +1,63 @@
+$canvas=$('#bannerCanvas').get(0);
+		$img=new Image();
+		
+		$img.onload=function(){
+			draw(0);
+			setTimeout(function(){
+				animating=true
+				requestAnimationFrame(step);
+			},1000)
+		}
+		$img.src="../images/2017.png";	
+		ctx=$canvas.getContext('2d')
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+var ie=false;
+var $canvas;
+var ctx;
+var $img;
+
+var draw=function(i){
+    ctx.clearRect(0,0,1920,990);
+    ctx.drawImage($img,0,iamgeHeight*i,imageWidth,iamgeHeight,0,0,imageWidth,iamgeHeight);
+}
+var lasttimestamp=null
+var animatedtime=0
+var animating=false
+var duration=2000
+var imagecount=21
+var imageWidth=1920
+var iamgeHeight=990
+var start=function(){
+    animatedtime=0
+}
+
+window.requestAnimationFrame = window.requestAnimationFrame || window.mozRequestAnimationFrame || window.webkitRequestAnimationFrame || window.msRequestAnimationFrame;
+
+var step= function(timestamp) { 
+		if (lasttimestamp===null){
+			lasttimestamp=timestamp
+		}
+        if (animating){
+            animatedtime=animatedtime+timestamp-lasttimestamp
+            i=Math.floor(animatedtime/duration*22)
+            if (i<imagecount){
+                draw(i)
+            }
+        }
+		lasttimestamp=timestamp		
+        requestAnimationFrame(step);
+}
