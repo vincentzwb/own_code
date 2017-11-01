@@ -4,7 +4,7 @@
 			ready:function(){
 				$(this).jPlayer("setMedia",{
 					m4v:vido1_src
-				})
+				}).jPlayer("play").jPlayer("repeat");
 			},
 			//solution:"flash,html",
 			swfPath: "/themes/basic/skin/js",
